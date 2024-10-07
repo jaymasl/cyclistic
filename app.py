@@ -3,6 +3,7 @@ import get_data
 import create_graph
 
 app = Flask(__name__)
+application = app
 
 @app.route('/')
 def index():
