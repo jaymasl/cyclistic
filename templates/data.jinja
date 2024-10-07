@@ -1,0 +1,15 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+    <h2>Cyclistic Data Visualization from September 2023 to August 2024</h2>
+    <div class="chart-container">
+        <div class="graph">{{ ride_count_graph|safe }}</div>
+        <div class="graph">{{ average_duration_graph|safe }}</div>
+        <div class="graph">{{ rideable_type_graph|safe }}</div>
+    </div>
+    <div class="wide-bar">{{ station_usage_graph|safe }}</div>
+    <div class="wide-bar">{{ rides_by_month_graph|safe }}</div>
+    <div class="wide-bar">{{ rides_by_day_graph|safe }}</div>
+    <div class="wide-bar">{{ rides_by_hour_graph|safe }}</div>
+    <div class="wide-bar">{{ ride_duration_histogram|safe }}</div>
+{% endblock %}

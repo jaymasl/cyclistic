@@ -1,0 +1,77 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+    <div class="summary-container">
+        <div class="key-insights">
+            <h2>Key Insights</h2>
+            <ul>
+                <li>
+                    <strong>Total Rides:</strong> Members rode <strong>62%</strong> more often than casuals.
+                    <ul>
+                        <li><strong>Members:</strong> 3,575,925 rides</li>
+                        <li><strong>Casuals:</strong> 1,971,730 rides</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Ride Durations:</strong> Casuals had longer ride durations on average.
+                    <ul>
+                        <li><strong>Members:</strong> 11.98 minutes</li>
+                        <li><strong>Casuals:</strong> 19.80 minutes</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Total Hours:</strong> Members logged more total hours.
+                    <ul>
+                        <li><strong>Members:</strong> 713,729.06 hours</li>
+                        <li><strong>Casuals:</strong> 650,798.13 hours</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Bike Preferences:</strong> Casuals slightly preferred for electric bikes.
+                    <ul>
+                        <li><strong>Members:</strong> 49.28%</li>
+                        <li><strong>Casuals:</strong> 51.35%</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Key Insight:</strong> Members and Casuals frequented different stations.
+                    <ul>
+                        <li><strong>Members:</strong> Kingsbury St & Kinzie St (3.12 members per 1 casual)</li>
+                        <li><strong>Casuals:</strong> Streeter Dr & Grand Ave (3.32 casuals per 1 member)</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Peak Weekday:</strong> Casuals and Members rode the most on different weekdays.
+                    <ul>
+                        <li><strong>Members:</strong> Wednesday</li>
+                        <li><strong>Casuals:</strong> Saturday</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Activity Trends:</strong> Summer months are most active. Busiest hours between 3 PM and 6 PM.
+                </li>
+            </ul>
+        </div>
+
+        <h3>Top 10 Most Frequented Stations</h3>
+            <table class="narrow-table">
+                <thead>
+                    <tr>
+                        <th>Station</th>
+                        <th>Member Count</th>
+                        <th>Casual Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for station in top_stations %}
+                        <tr>
+                            <td>{{ station[0] }}</td>
+                            <td>{{ station[3] }}</td>
+                            <td>{{ station[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+    </div>
+{% endblock %}
