@@ -309,7 +309,7 @@ def create_station_map():
         plot_bgcolor='rgba(0, 0, 0, 1)',
         title_font=dict(color='white'),
         title={
-        'text': 'Map of the Top 10 Cyclistic Stations in Chicago',
+        'text': 'Top 10 Stations Map',
         'font': {'size': 24},
         'x': 0.50,
         'xanchor': 'center'
