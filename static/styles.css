@@ -24,6 +24,8 @@ html {
     justify-content: center;
     background-color: #1e1e1e;
     border-radius: 8px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .main-nav ul li {
@@ -256,8 +258,17 @@ td.trip-count, .center-text td {
     color: #777;
 }
 
-@media (max-width: 768px) {
-    .container, table, .graph {
+@media (max-width: 480px) {
+    .main-nav ul {
+        flex-wrap: wrap;
+    }
+
+    .main-nav ul li {
+        flex: 1 0 50%;
+        text-align: center;
+    }
+
+    .container, table, .graph, .narrow-table {
         width: 90%;
     }
 
