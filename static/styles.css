@@ -92,14 +92,17 @@ main {
 }
 
 .map-view {
-    width: 1200px;
+    width: 95%;
+    max-width: 1200px;
     height: 800px;
     margin: 0 auto 10px;
     padding: 10px;
-    background-color: #1e1e1e; 
+    background-color: #1e1e1e;
     border: 2px solid #4CAF50;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
 }
 
 .chart-container {
@@ -112,12 +115,12 @@ main {
 }
 
 .graph {
-    flex: 1 1 300px;
+    flex: 1 1 420px;
     max-width: 420px;
     height: 420px;
     margin: 10px;
     padding: 20px;
-    background-color: #1e1e1e; 
+    background-color: #1e1e1e;
     border: 2px solid #4CAF50;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -263,7 +266,15 @@ td.trip-count, .center-text td {
     }
 
     .graph {
-        height: 45vh;
+        width: 90%;
+        height: auto;
+        max-width: 100%;
+        margin: 10px auto;
+    }
+
+    .map-view {
+        width: 95%;
+        height: 800px;
     }
 
     .footer-content {

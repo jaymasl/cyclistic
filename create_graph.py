@@ -6,16 +6,12 @@ import numpy as np
 GRAPH_WIDTH = 400
 GRAPH_HEIGHT = 400
 
-WIDE_GRAPH_WIDTH = 1280
-WIDE_GRAPH_HEIGHT = 600
-
 MEMBER_COLOR = '#007BFF'
 CASUAL_COLOR = '#FFA500'
-CLASSIC_COLOR = '#003D7A'
-CLASSIC_CASUAL_COLOR = '#CC7A00'
-BACKGROUND_COLOR = '#1E1E1E'
-TITLE_COLOR = 'white'
-AXIS_COLOR = 'white'
+BG_COLOR = '#1E1E1E'
+
+def create_top_stations_table():
+    return get_data.get_top_5_stations()
 
 def create_ride_count_graph(total_members, total_casual):
     fig = go.Figure(data=[
@@ -26,11 +22,11 @@ def create_ride_count_graph(total_members, total_casual):
     fig.update_layout(
         barmode='group', 
         title='Total Rides', 
-        title_font_color=TITLE_COLOR,
+        title_font_color='white',
         yaxis_title='Number of Rides',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
         width=GRAPH_WIDTH,
         height=GRAPH_HEIGHT,
         showlegend=False
@@ -49,17 +45,47 @@ def create_average_duration_graph():
         fig.update_layout(
             barmode='group', 
             title='Average Duration Per Ride', 
-            title_font_color=TITLE_COLOR,
+            title_font_color='white',
             yaxis_title='Average Duration (minutes)',
-            paper_bgcolor=BACKGROUND_COLOR,
-            plot_bgcolor=BACKGROUND_COLOR,
-            font=dict(color=AXIS_COLOR),
+            paper_bgcolor=BG_COLOR,
+            plot_bgcolor=BG_COLOR,
+            font=dict(color='white'),
             width=GRAPH_WIDTH,
             height=GRAPH_HEIGHT,
             showlegend=False
         )
         
         return fig.to_html(full_html=False)
+
+def create_rideable_type_graph():
+    rideable_counts = get_data.get_rideable_type_by_user_type()
+    
+    electric_member = rideable_counts['electric_bike']['member']
+    electric_casual = rideable_counts['electric_bike']['casual']
+    classic_member = rideable_counts['classic_bike']['member']
+    classic_casual = rideable_counts['classic_bike']['casual']
+
+    fig = go.Figure(data=[
+        go.Bar(name='Electric Member', x=['Electric Member'], y=[electric_member], marker_color=MEMBER_COLOR),
+        go.Bar(name='Classic Member', x=['Classic Member'], y=[classic_member], marker_color='#003D7A'),
+        go.Bar(name='Electric Casual', x=['Electric Casual'], y=[electric_casual], marker_color=CASUAL_COLOR),
+        go.Bar(name='Classic Casual', x=['Classic Casual'], y=[classic_casual], marker_color='#CC7A00')
+    ])
+    
+    fig.update_layout(
+        barmode='group', 
+        title='Rideable Type', 
+        title_font_color='white',
+        yaxis_title='Number of Rides',
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
+        width=GRAPH_WIDTH,
+        height=GRAPH_HEIGHT,
+        showlegend=False
+    )
+    
+    return fig.to_html(full_html=False)
 
 def create_hourly_rides_graph():
     active_hours = get_data.get_hourly_ride_counts()
@@ -84,12 +110,11 @@ def create_hourly_rides_graph():
         title='Rides by Hour',
         xaxis_title='Hour of the Day',
         yaxis_title='Number of Rides',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
         barmode='group',
-        width=WIDE_GRAPH_WIDTH,
-        height=WIDE_GRAPH_HEIGHT,
+        autosize=True,
         legend=dict(orientation='h', x=0.5, y=1.1, xanchor='center', yanchor='bottom')
     )
 
@@ -123,12 +148,11 @@ def create_rides_by_day_graph():
         title='Rides by Week Day',
         xaxis_title='Day of the Week',
         yaxis_title='Number of Rides',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
         barmode='group',
-        width=WIDE_GRAPH_WIDTH,
-        height=WIDE_GRAPH_HEIGHT,
+        autosize=True,
         legend=dict(orientation='h', x=0.5, y=1.1, xanchor='center', yanchor='bottom')
     )
 
@@ -148,15 +172,14 @@ def create_rides_by_month_graph():
 
     fig.update_layout(
         title='Rides by Month', 
-        title_font_color=TITLE_COLOR,
+        title_font_color='white',
         xaxis_title='Month', 
         yaxis_title='Number of Rides',
         barmode='group',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
-        width=WIDE_GRAPH_WIDTH,
-        height=WIDE_GRAPH_HEIGHT,
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
+        autosize=True,
         xaxis=dict(
             tickmode='array',
             tickvals=months,
@@ -169,36 +192,6 @@ def create_rides_by_month_graph():
             xanchor="center",
             x=0.5
         )
-    )
-    
-    return fig.to_html(full_html=False)
-
-def create_rideable_type_graph():
-    rideable_counts = get_data.get_rideable_type_by_user_type()
-    
-    electric_member = rideable_counts['electric_bike']['member']
-    electric_casual = rideable_counts['electric_bike']['casual']
-    classic_member = rideable_counts['classic_bike']['member']
-    classic_casual = rideable_counts['classic_bike']['casual']
-
-    fig = go.Figure(data=[
-        go.Bar(name='Electric Member', x=['Electric Member'], y=[electric_member], marker_color=MEMBER_COLOR),
-        go.Bar(name='Classic Member', x=['Classic Member'], y=[classic_member], marker_color=CLASSIC_COLOR),
-        go.Bar(name='Electric Casual', x=['Electric Casual'], y=[electric_casual], marker_color=CASUAL_COLOR),
-        go.Bar(name='Classic Casual', x=['Classic Casual'], y=[classic_casual], marker_color=CLASSIC_CASUAL_COLOR)
-    ])
-    
-    fig.update_layout(
-        barmode='group', 
-        title='Rideable Type', 
-        title_font_color=TITLE_COLOR,
-        yaxis_title='Number of Rides',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
-        width=GRAPH_WIDTH,
-        height=GRAPH_HEIGHT,
-        showlegend=False
     )
     
     return fig.to_html(full_html=False)
@@ -217,11 +210,9 @@ def create_member_casual_top_stations_graph(top_stations):
         barmode='group', 
         title='Rides by Top 10 Stations with Comparison',
         yaxis_title='Number of Rides',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
-        width=WIDE_GRAPH_WIDTH,
-        height=WIDE_GRAPH_HEIGHT,
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
         legend=dict(
             orientation="h",
             yanchor="bottom",
@@ -232,9 +223,6 @@ def create_member_casual_top_stations_graph(top_stations):
     )
     
     return fig.to_html(full_html=False)
-
-def create_top_stations_table():
-    return get_data.get_top_5_stations()
 
 def create_ride_duration_histogram():
     data = get_data.get_ride_duration_distribution()
@@ -267,11 +255,9 @@ def create_ride_duration_histogram():
         xaxis_title='Duration Ranges (in minutes)',
         yaxis_title='Number of Rides',
         barmode='group',
-        paper_bgcolor=BACKGROUND_COLOR,
-        plot_bgcolor=BACKGROUND_COLOR,
-        font=dict(color=AXIS_COLOR),
-        width=WIDE_GRAPH_WIDTH,
-        height=WIDE_GRAPH_HEIGHT,
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(color='white'),
         xaxis=dict(tickmode='array', tickvals=duration_ranges, ticktext=duration_ranges, title_standoff=15),
         legend=dict(orientation='h', x=0.5, y=1.1, xanchor='center', yanchor='bottom')
     )
@@ -313,6 +299,7 @@ def create_station_map():
     
     fig.update_layout(
         height=800,
+        autosize=True,
         showlegend=False,
         mapbox=dict(
             zoom=12.5,
