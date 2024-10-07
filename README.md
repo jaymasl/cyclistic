@@ -11,6 +11,7 @@ Make sure you have Python 3.8+ installed. Then, install the required dependencie
 
 ```bash
 pip install -r requirements.txt
+```
 
 ### 2. Load the Data into DuckDB
 
